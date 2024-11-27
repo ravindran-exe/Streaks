@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth, googleProvider } from "../firebase";
 import "../styles/Auth.css";
 
 const Login = () => {
@@ -17,6 +17,17 @@ const Login = () => {
       navigate("/dashboard");
     } catch (err) {
       setError("Invalid email or password.");
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log("User signed in with Google:", result.user);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Error during Google sign-in:", err.message);
+      setError("Failed to sign in with Google. Please try again.");
     }
   };
 
@@ -42,6 +53,9 @@ const Login = () => {
           />
           <button type="submit" className="auth-button">Login</button>
         </form>
+        <button onClick={handleGoogleLogin} className="google-login-button">
+          Sign in with Google
+        </button>
         <p className="auth-footer">
           Don't have an account? <a href="/signup">Sign Up</a>
         </p>

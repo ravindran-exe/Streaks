@@ -87,3 +87,21 @@ body, html {
     text-decoration: underline;
   }
   
+  
+.google-login-button {
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 15px;
+  background-color: #2098e2;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: "Playfair Display", serif;
+  transition: background-color 0.3s ease;
+}
+
+.google-login-button:hover {
+  background-color: #357ae8;
+}
